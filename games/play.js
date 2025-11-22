@@ -13,8 +13,6 @@ RufflePlayer.config.allowNetworking = "none"
 
 // create ruffle player
 const player = RufflePlayer.sources.local.createPlayer()
-// hide player initially
-player.style.display = "none"
 // append player into body
 document.body.appendChild(player)
 
@@ -25,11 +23,8 @@ const params = new URLSearchParams(location.search)
 player.load({
   autoplay: "on",
   unmuteOverlay: "hidden",
-  splashScreen: false,
   url: `./sources/${params.get("id")}.swf`
 }).then(() => {
   // avoid fetch requests
   window.fetch = () => new Promise((_, reject) => reject())
-  // display game with preload delay
-  player.style.display = "block"
 })
