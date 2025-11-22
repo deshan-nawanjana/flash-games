@@ -1,0 +1,244 @@
+* {
+  -webkit-tap-highlight-color: transparent;
+  font-family: "Arcade";
+  outline: none;
+}
+
+body {
+  margin: 0px;
+  overflow: hidden;
+  user-select: none;
+  background-color: #000;
+  background-image: url(./assets/images/spinner.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 36px auto;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+#app[v-if] {
+  display: none;
+}
+
+#app {
+  height: 100vh;
+  background-image: url(./assets/images/background.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow-y: auto;
+}
+
+iframe {
+  border: none;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  left: 0px;
+  top: 0px;
+}
+
+.button {
+  height: 40px;
+  background-color: #FFF3;
+  font-size: 18px;
+  border: none;
+  margin: 0px auto;
+  color: #FFF;
+  padding: 0px 18px;
+}
+
+.button:hover {
+  background-color: #FFF4;
+}
+
+.button:active {
+  background-color: #FFF3;
+}
+
+::selection {
+  background-color: #FFF2;
+}
+
+.login {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #0005;
+  gap: 40px;
+}
+
+.login-container {
+  width: 380px;
+  background-color: #252525;
+  border: 1px solid #FFF3;
+  overflow: hidden;
+}
+
+.login-title {
+  text-align: center;
+  line-height: 70px;
+  font-size: 28px;
+  color: #FFF;
+}
+
+.login-tabs {
+  line-height: 60px;
+  border-top: 1px solid #FFF3;
+  border-bottom: 1px solid #FFF3;
+  display: flex;
+}
+
+.login-tab {
+  padding: 0px 20px;
+  text-align: center;
+  color: #FFFA;
+  font-size: 20px;
+  flex: 50%;
+}
+
+.login-tab[data-active] {
+  background-color: #FFF1;
+  color: #FFFC;
+}
+
+.login-content {
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.login-input {
+  height: 42px;
+  font-size: 20px;
+  padding: 0px 15px;
+  background-color: #FFF1;
+  border: 1px solid #FFF3;
+  text-align: center;
+  color: #FFFE;
+}
+
+.login-input:focus {
+  border: 1px solid #FFF5;
+}
+
+.login-footer {
+  padding: 15px;
+  border-top: 1px solid #FFF3;
+  color: #FFF8;
+  text-align: center;
+  font-size: 17px;
+}
+
+.home {
+  width: calc(100vw - 200px);
+  background-color: #252525EE;
+  border: 1px solid #FFF3;
+  margin: 100px auto;
+}
+
+.home .button {
+  height: 46px;
+  border-left: 2px solid #0004;
+}
+
+.home-header {
+  display: flex;
+  border-bottom: 1px solid #FFF3;
+}
+
+.search-input {
+  height: 46px;
+  font-size: 20px;
+  padding: 0px 15px;
+  background-color: #FFF1;
+  border: none;
+  color: #FFFE;
+  flex-grow: 1;
+}
+
+.home-content {
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.home-item {
+  width: calc(calc(100% / 3) - calc(25px / 3));
+  border: 1px solid #FFF2;
+  display: flex;
+  background-color: #0002;
+  transition: background-color 0.15s;
+  cursor: pointer;
+  gap: 20px;
+}
+
+.home-item:hover {
+  background-color: #FFFFFF0A;
+}
+
+.home-item:hover .home-item-image::before {
+  opacity: 1;
+}
+
+.home-item-image {
+  width: 80px;
+  height: 80px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.home-item-image::before {
+  content: "";
+  opacity: 0;
+  position: absolute;
+  width: inherit;
+  height: inherit;
+  transition: opacity 0.15s;
+  background-color: #0008;
+  background-image: url(./assets/images/play.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 45px auto;
+}
+
+.home-item-details {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}
+
+.home-item-name {
+  color: #FFFA;
+  font-size: 22px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: calc(calc(100vw - 625px) / 3);
+}
+
+.home-item-time {
+  color: #FFF5;
+  font-size: 16.5px;
+}
+
+.home-empty {
+  flex-grow: 1;
+  color: #FFFA;
+  font-size: 18px;
+  line-height: 60px;
+  text-align: center;
+}

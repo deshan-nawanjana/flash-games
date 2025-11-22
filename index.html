@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Play Your Favorite Flash Games from Old Times" />
+  <!-- open graph tags -->
+  <meta property="og:title" content="Flash Games Library">
+  <meta property="og:description" content="Play Your Favorite Flash Games from Old Times">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://deshan-nawanjana.github.io/flash-games/assets/images/cover.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <!-- twitter card tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Flash Games Library">
+  <meta name="twitter:description" content="Play Your Favorite Flash Games from Old Times">
+  <meta name="twitter:image" content="https://deshan-nawanjana.github.io/flash-games/assets/images/cover.jpg"> 
+  <!-- favicon -->
+  <link rel="shortcut icon" href="./assets/images/icon.png" type="image/png">
+  <!-- style -->
+  <link rel="stylesheet" href="./index.css">
+  <!-- preload : images -->
+  <link rel="preload" href="./assets/images/spinner.svg" as="image" type="image/svg+xml" />
+  <link rel="preload" href="./assets/images/background.png" as="image" type="image/png" />
+  <!-- preload : fonts -->
+  <link rel="stylesheet" href="./assets/fonts/fonts.css">
+  <link rel="preload" href="./assets/fonts/Arcade/400.ttf" as="font" type="font/ttf" crossorigin>
+  <!-- libraries -->
+  <script src="./assets/libraries/ruffle/ruffle.js"></script>
+  <script src="./assets/libraries/vue.min.js"></script>
+  <!-- script -->
+  <script src="./index.js" type="module" defer></script>
+  <!-- page title -->
+  <title>Flash Games Library</title>
+</head>
+<body bgcolor="#000000">
+  <!-- app root -->
+  <div id="app" v-if="library">
+    <!-- login screen -->
+    <div class="login" v-if="!profile">
+      <div class="login-container">
+        <div class="login-title">
+          Flash Games Library
+        </div>
+        <!-- login tabs -->
+        <div class="login-tabs">
+          <div
+            class="login-tab login-tab-create"
+            @click="login.tab = 'create'"
+            :data-active="login.tab === 'create'">
+            Create Profile
+          </div>
+          <div
+            class="login-tab login-tab-load"
+            @click="login.tab = 'load'"
+            :data-active="login.tab === 'load'">
+            Load Profile
+          </div>
+        </div>
+        <!-- create profile -->
+        <div class="login-content" v-if="login.tab === 'create'">
+          <input
+            type="text"
+            id="profile-name"
+            class="login-input"
+            placeholder="Input your name here"
+            maxlength="20"
+            autocomplete="off"
+            spellcheck="false"
+            v-model="inputs.name"
+            @blur="inputs.name = inputs.name.trim()"
+            ref="login"
+          />
+          <button
+            class="button"
+            @click="createProfile">
+            Create Profile
+          </button>
+        </div>
+        <!-- load profile -->
+        <div class="login-content" v-if="login.tab === 'load'">
+          <button
+            class="button"
+            @click="loadProfile">
+            Load Profile from Files
+          </button>
+        </div>
+        <div class="login-footer">
+          Allow your web browser to make changes in your profile data file.
+          It will backup your gameplay data for later use.
+        </div>
+      </div>
+    </div>
+    <!-- home screen -->
+    <div class="home" v-else>
+      <div class="home-header">
+          <input
+            type="text"
+            id="game-search"
+            class="search-input"
+            placeholder="Search and filter games..."
+            maxlength="80"
+            autocomplete="off"
+            spellcheck="false"
+            v-model="inputs.search"
+            @blur="inputs.search = inputs.search.trim()"
+          />
+          <button class="button" @click="toggleSort">
+            Sorted by {{inputs.sort}}
+          </button>
+          <button class="button">
+            {{profile.name}}
+          </button>
+      </div>
+      <div class="home-content">
+        <div
+          class="home-item"
+          v-for="item in results"
+          @click="launchGame(item.id)">
+          <div
+            class="home-item-image"
+            :style="imageURL(item.id)">
+          </div>
+          <div class="home-item-details">
+            <div class="home-item-name">
+              {{item.name}}
+            </div>
+            <div
+              class="home-item-time"
+              v-if="profile.games[item.id]">
+              {{timeString(item.id)}}
+            </div>
+          </div>
+        </div>
+        <div class="home-empty" v-if="!results.length">
+          No results found :/
+        </div>
+      </div>
+    </div>
+    <iframe :src="currentURL" v-if="current"></iframe>
+  </div>
+</body>
+</html>

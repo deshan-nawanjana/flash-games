@@ -1,0 +1,25 @@
+* {
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  outline: none;
+}
+
+body {
+  margin: 0px;
+  overflow: hidden;
+  background-color: #000;
+  background-image: url(../assets/images/spinner.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 36px auto;
+  width: 100vw;
+  height: 100vh;
+}
+
+ruffle-player {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+}
