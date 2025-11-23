@@ -1,0 +1,27 @@
+{
+  "name": "Flash Games Library",
+  "short_name": "Flash Games",
+  "start_url": "/flash-games/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/flash-games/assets/manifest/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/flash-games/assets/manifest/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "description": "Play Your Favorite Flash Games from Old Times",
+  "background_color": "#000000",
+  "theme_color": "#222222",
+  "lang": "en",
+  "categories": [
+    "entertainment",
+    "games"
+  ]
+}
