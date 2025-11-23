@@ -252,3 +252,42 @@ iframe {
   line-height: 60px;
   text-align: center;
 }
+
+@media (max-width: 1150px) {
+  .home-item {
+    width: calc(calc(100% / 2) - calc(14px / 2));
+  }
+
+  .home-item-name {
+    width: calc(calc(100vw - 465px) / 2);
+  }
+}
+
+@media (max-width: 880px) {
+  .home {
+    margin: 20px;
+    width: auto;
+  }
+
+  .home-header .button {
+    display: none;
+  }
+
+  .home-item {
+    width: 100%;
+  }
+
+  .home-item-name {
+    width: calc(calc(100vw - 50px) / 2);
+  }
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    width: calc(100vw - 40px);
+  }
+
+  .login-title {
+    font-size: 20px;
+  }
+}
