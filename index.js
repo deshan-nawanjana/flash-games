@@ -33,9 +33,11 @@ new Vue({
     // current game id
     current: null,
     // input values
-    inputs: { name: "", search: "", sort: "Game Name" },
+    inputs: { name: "", search: "", sort: "Played Time" },
     // file handler
-    handler: null
+    handler: null,
+    // guest mode
+    guest: !window.showSaveFilePicker
   },
   // computed values
   computed: {
@@ -102,8 +104,15 @@ new Vue({
         await this.saveProfile()
       })
     },
+    // method to load guest mode
+    loadGuest() {
+      // set guest data
+      this.profile = { name: "Guest Mode", games: {} }
+    },
     // method to save profile
     async saveProfile() {
+      // return if in guest mode
+      if (this.guest) return
       // create writable
       const writable = await this.handler.createWritable()
       // write default profile data
@@ -164,6 +173,8 @@ new Vue({
           games[id].data[key] = localStorage[key]
         }
       }
+      // reload games list
+      this.profile.games = { ...games }
       // save profile
       await this.saveProfile()
     },
@@ -191,7 +202,7 @@ new Vue({
     // load games library
     this.library = await fetch("index.json").then(resp => resp.json())
     // hash change listener
-    window.addEventListener("hashchange", event => {
+    window.addEventListener("hashchange", () => {
       // clear hash if no profile
       if (!this.profile) return location.hash = ""
       // check hash
@@ -202,6 +213,8 @@ new Vue({
           location.hash = ""
         }
       } else {
+        // scroll to top
+        this.$el.scrollTop = 0
         // save game on close
         this.saveGame(this.current)
         // close current game

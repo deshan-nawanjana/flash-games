@@ -46,7 +46,7 @@
           Flash Games Library
         </div>
         <!-- login tabs -->
-        <div class="login-tabs">
+        <div class="login-tabs" v-if="!guest">
           <div
             class="login-tab login-tab-create"
             @click="login.tab = 'create'"
@@ -61,7 +61,7 @@
           </div>
         </div>
         <!-- create profile -->
-        <div class="login-content" v-if="login.tab === 'create'">
+        <div class="login-content" v-if="login.tab === 'create' && !guest">
           <input
             type="text"
             id="profile-name"
@@ -88,9 +88,18 @@
             Load Profile from Files
           </button>
         </div>
-        <div class="login-footer">
+        <div class="login-footer" v-if="!guest">
           Allow your web browser to make changes in your profile data file.
           It will backup your gameplay data for later use.
+        </div>
+        <div class="login-footer" v-else>
+          This browser does not support file access API. Therefore the game
+          progress will not be saved.
+          <button
+            class="button"
+            @click="loadGuest">
+            Continue in Guest Mode
+          </button>
         </div>
       </div>
     </div>
@@ -111,7 +120,7 @@
           <button class="button" @click="toggleSort">
             Sorted by {{inputs.sort}}
           </button>
-          <button class="button">
+          <button class="button" :disabled="guest">
             {{profile.name}}
           </button>
       </div>
